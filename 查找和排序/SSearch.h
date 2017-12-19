@@ -16,14 +16,22 @@ public:
 	~SSearch();//析构函数，删除表空间；
 	void Create(int n);//创建时根据用户需求，再为相应的数据元素赋值；
 	void Display();//输出静态表中的数据元素；
+	int GetLen();
 	int SeSearch(T key);//从表中最后一个元素开始顺序查找；
 	void Ascendsort();//升序排列；
 	int BiSearch_1(T key);//折半查找，非递归算法；
 	int BiSearch_2(T key);//折半查找，递归算法；
 	int BiSearch(int x, int y, T key);//折半查找递归；
-	int GetLength();//返回表长；
 	void BInsertSort();//折半插入排序；
+	void QuitSort();//快速排序；
+	void SelectSort();//简单选择排序；
+	int SelectMinKey(int n);
+	void HeapSort();//堆排序；
 };
+template<class T>
+int SSearch<T>::GetLen() {
+	return len;
+}
 template <class T>
 SSearch<T>::SSearch() {
 	ST = NULL;
@@ -101,10 +109,9 @@ int SSearch<T>::BiSearch_2(T key) {
 	k = BiSearch(0, len, key);
 	return k;
 }
-template<class T>
-int SSearch<T>::GetLength() {
-	return len;
-}
+
+
+/************折半插入排序************/
 template<class T>
 void SSearch<T>::BInsertSort() {
 	int high, low, mid;
@@ -124,3 +131,100 @@ void SSearch<T>::BInsertSort() {
 		ST[high + 1].key = ST[0].key;
 	}
 }
+/************折半插入排序************/
+
+
+
+/************快速排序************/
+template<class T>
+int Partition(Node<T> *ST,int low,int high) {
+	T pivotkey;
+	ST[0].key = ST[low].key;
+	pivotkey = ST[low].key;
+	while (low < high) {
+		while (low < high&&ST[high].key >= pivotkey) --high;
+		ST[low].key = ST[high].key;
+		while (low < high&&ST[low].key <= pivotkey) ++low;
+		ST[high].key = ST[low].key;
+	}
+	ST[low].key = ST[0].key;
+	return low;
+}
+
+template<class T>
+void Qsort(Node<T> *ST, int low, int high) {
+	int mid;
+	if (low < high) {
+		mid = Partition(ST, low, high);
+		Qsort(ST, low, mid-1);//对低子表进行排序；
+		Qsort(ST, mid+1, high);//对高子表进行排序；
+
+	}
+}
+
+template<class T>
+void SSearch<T>::QuitSort() {
+	Qsort(ST, 1, len);
+}
+/************快速排序************/
+
+
+/************简单选择排序************/
+template<class T>
+int SSearch<T>:: SelectMinKey(int n){
+	int min = n;
+	T minkey;
+	minkey = ST[n].key;
+	for (int i = n + 1; i < len; i++) {
+		if (ST[i].key < minkey) {
+			minkey = ST[i].key;
+			min = i;
+		}
+	}
+	return min;
+}
+
+template<class T>
+void SSearch<T>::SelectSort() {
+	int j;
+	T t;
+	for (int i = 1; i < len; i++) {
+		j = SelectMinKey(i);
+		if (i != j) {
+			t = ST[i].key;
+			ST[i].key = ST[j].key;
+			ST[j].key = t;
+		}
+	}
+}
+/************简单选择排序************/
+
+
+/************堆排序************/
+template<class T>
+void HeapAdjust(Node<T> *ST, int s, int m) {
+	T rc = ST[s].key;
+	for (int j = 2 * s; j <= m; j *= 2) {
+		if (j < m&&ST[j].key <= ST[j + 1].key) j++;
+		if (rc > ST[j].key) break;
+		ST[s].key = ST[j].key;
+		s = j;
+	}
+	ST[s].key = rc;
+}
+
+template<class T>
+void SSearch<T>::HeapSort() {
+	T value;
+	for (int i = len / 2; i > 0; i--) {
+		HeapAdjust(ST, i, len);
+	}
+	for (int i = len; i > 1; --i) {
+		value = ST[1].key;
+		ST[1].key = ST[i].key;
+		ST[i].key = value;
+		HeapAdjust(ST, 1, i - 1);
+	}
+}
+/************堆排序************/
+
