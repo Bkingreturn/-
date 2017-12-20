@@ -1,32 +1,32 @@
-ï»¿#pragma once
+#pragma once
 template<class T>
 struct Node {
 	T key;
 	/*
-	....æ ¹æ®éœ€è¦æ·»åŠ ã€‚
+	....¸ù¾İĞèÒªÌí¼Ó¡£
 	*/
 };
 template<class T>
 class SSearch {
 private:
-	Node<T> *ST;//è¡¨é¦–å€ï¼›
-	int len;//è¡¨é•¿ï¼›
+	Node<T> *ST;//±íÊ×Ö·£»
+	int len;//±í³¤£»
 public:
-	SSearch();//æ„é€ å‡½æ•°ï¼›
-	~SSearch();//ææ„å‡½æ•°ï¼Œåˆ é™¤è¡¨ç©ºé—´ï¼›
-	void Create(int n);//åˆ›å»ºæ—¶æ ¹æ®ç”¨æˆ·éœ€æ±‚ï¼Œå†ä¸ºç›¸åº”çš„æ•°æ®å…ƒç´ èµ‹å€¼ï¼›
-	void Display();//è¾“å‡ºé™æ€è¡¨ä¸­çš„æ•°æ®å…ƒç´ ï¼›
+	SSearch();//¹¹Ôìº¯Êı£»
+	~SSearch();//Îö¹¹º¯Êı£¬É¾³ı±í¿Õ¼ä£»
+	void Create(int n);//´´½¨Ê±¸ù¾İÓÃ»§ĞèÇó£¬ÔÙÎªÏàÓ¦µÄÊı¾İÔªËØ¸³Öµ£»
+	void Display();//Êä³ö¾²Ì¬±íÖĞµÄÊı¾İÔªËØ£»
 	int GetLen();
-	int SeSearch(T key);//ä»è¡¨ä¸­æœ€åä¸€ä¸ªå…ƒç´ å¼€å§‹é¡ºåºæŸ¥æ‰¾ï¼›
-	void Ascendsort();//å‡åºæ’åˆ—ï¼›
-	int BiSearch_1(T key);//æŠ˜åŠæŸ¥æ‰¾ï¼Œéé€’å½’ç®—æ³•ï¼›
-	int BiSearch_2(T key);//æŠ˜åŠæŸ¥æ‰¾ï¼Œé€’å½’ç®—æ³•ï¼›
-	int BiSearch(int x, int y, T key);//æŠ˜åŠæŸ¥æ‰¾é€’å½’ï¼›
-	void BInsertSort();//æŠ˜åŠæ’å…¥æ’åºï¼›
-	void QuitSort();//å¿«é€Ÿæ’åºï¼›
-	void SelectSort();//ç®€å•é€‰æ‹©æ’åºï¼›
+	int SeSearch(T key);//´Ó±íÖĞ×îºóÒ»¸öÔªËØ¿ªÊ¼Ë³Ğò²éÕÒ£»
+	void Ascendsort();//ÉıĞòÅÅÁĞ£»
+	int BiSearch_1(T key);//ÕÛ°ë²éÕÒ£¬·Çµİ¹éËã·¨£»
+	int BiSearch_2(T key);//ÕÛ°ë²éÕÒ£¬µİ¹éËã·¨£»
+	int BiSearch(int x, int y, T key);//ÕÛ°ë²éÕÒµİ¹é£»
+	void BInsertSort();//ÕÛ°ë²åÈëÅÅĞò£»
+	void QuitSort();//¿ìËÙÅÅĞò£»
+	void SelectSort();//¼òµ¥Ñ¡ÔñÅÅĞò£»
 	int SelectMinKey(int n);
-	void HeapSort();//å †æ’åºï¼›
+	void HeapSort();//¶ÑÅÅĞò£»
 };
 template<class T>
 int SSearch<T>::GetLen() {
@@ -47,7 +47,7 @@ void SSearch<T>::Create(int n) {
 	len = n;
 	ST =  new Node<T>[len+1];
 	Node<T>e;
-	cout << "è¯·è¾“å…¥" << len << "ä¸ªæ•°æ®å…ƒç´ ï¼š";
+	cout << "ÇëÊäÈë" << len << "¸öÊı¾İÔªËØ£º";
 	for (int i = 1; i < len+1; i++) {
 		cin >> e.key;
 		ST[i] = e;
@@ -56,24 +56,31 @@ void SSearch<T>::Create(int n) {
 template<class T>
 void SSearch<T>::Display() {
 	int i;
-	cout << "é™æ€è¡¨ä¸­çš„æ•°æ®å…ƒç´ ä¸ºï¼š";
+	cout << "¾²Ì¬±íÖĞµÄÊı¾İÔªËØÎª£º";
 	for (i = 1; i < len ; i++) {
 		cout << ST[i].key << ",";
 		
 	}
 	if (i = len) cout << ST[i].key << endl;
 }
+
+
+/************Ë³Ğò²éÕÒ************/
 template<class T>
 int SSearch<T>::SeSearch(T key) {
 	ST[0].key = key;
-	for (int i = len; ST[i].key<>key; i++);
-	if (i == 0) cout << "æŸ¥æ‰¾ä¸æˆåŠŸï¼" << endl;
+	for (int i = len; ST[i].key<key||ST[i].key>key; i++);
+	if (i == 0) cout << "²éÕÒ²»³É¹¦£¡" << endl;
 	return i;
 }
+/************Ë³Ğò²éÕÒ************/
+
+
+/************ÕÛ°ë²éÕÒ************/
 template<class T>
 int SSearch<T>::BiSearch_1(T key) {
 	if (len == 0 && ST == NULL) {
-		cout << "é™æ€è¡¨ä¸å­˜åœ¨ï¼Œè¯·é‡æ–°å»ºç«‹è¡¨\n";
+		cout << "¾²Ì¬±í²»´æÔÚ£¬ÇëÖØĞÂ½¨Á¢±í\n";
 		return -1;
 	}
 	else {
@@ -106,12 +113,14 @@ int SSearch<T>::BiSearch(int x, int y, T key) {
 template<class T>
 int SSearch<T>::BiSearch_2(T key) {
 	int k;
-	k = BiSearch(0, len, key);
+	k = BiSearch(1, len, key);
 	return k;
 }
+/************ÕÛ°ë²éÕÒ************/
 
 
-/************æŠ˜åŠæ’å…¥æ’åº************/
+
+/************ÕÛ°ë²åÈëÅÅĞò************/
 template<class T>
 void SSearch<T>::BInsertSort() {
 	int high, low, mid;
@@ -131,11 +140,11 @@ void SSearch<T>::BInsertSort() {
 		ST[high + 1].key = ST[0].key;
 	}
 }
-/************æŠ˜åŠæ’å…¥æ’åº************/
+/************ÕÛ°ë²åÈëÅÅĞò************/
 
 
 
-/************å¿«é€Ÿæ’åº************/
+/************¿ìËÙÅÅĞò************/
 template<class T>
 int Partition(Node<T> *ST,int low,int high) {
 	T pivotkey;
@@ -156,8 +165,8 @@ void Qsort(Node<T> *ST, int low, int high) {
 	int mid;
 	if (low < high) {
 		mid = Partition(ST, low, high);
-		Qsort(ST, low, mid-1);//å¯¹ä½å­è¡¨è¿›è¡Œæ’åºï¼›
-		Qsort(ST, mid+1, high);//å¯¹é«˜å­è¡¨è¿›è¡Œæ’åºï¼›
+		Qsort(ST, low, mid-1);//¶ÔµÍ×Ó±í½øĞĞÅÅĞò£»
+		Qsort(ST, mid+1, high);//¶Ô¸ß×Ó±í½øĞĞÅÅĞò£»
 
 	}
 }
@@ -166,10 +175,10 @@ template<class T>
 void SSearch<T>::QuitSort() {
 	Qsort(ST, 1, len);
 }
-/************å¿«é€Ÿæ’åº************/
+/************¿ìËÙÅÅĞò************/
 
 
-/************ç®€å•é€‰æ‹©æ’åº************/
+/************¼òµ¥Ñ¡ÔñÅÅĞò************/
 template<class T>
 int SSearch<T>:: SelectMinKey(int n){
 	int min = n;
@@ -197,10 +206,10 @@ void SSearch<T>::SelectSort() {
 		}
 	}
 }
-/************ç®€å•é€‰æ‹©æ’åº************/
+/************¼òµ¥Ñ¡ÔñÅÅĞò************/
 
 
-/************å †æ’åº************/
+/************¶ÑÅÅĞò************/
 template<class T>
 void HeapAdjust(Node<T> *ST, int s, int m) {
 	T rc = ST[s].key;
@@ -226,5 +235,5 @@ void SSearch<T>::HeapSort() {
 		HeapAdjust(ST, 1, i - 1);
 	}
 }
-/************å †æ’åº************/
+/************¶ÑÅÅĞò************/
 

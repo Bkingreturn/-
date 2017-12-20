@@ -1,64 +1,63 @@
-ï»¿// æŸ¥æ‰¾å’Œæ’åº.cpp: å®šä¹‰æ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
-//
 
-#include "stdafx.h"
+
 #include<iostream>
 #include "SSearch.h"
 using namespace std;
 
 int main()
 {
-	SSearch<int> s[4];
-	int n, m,k;
+	SSearch<float> s[4];
+	int n,k;
+	float m;
 	
-	cout << "è¯·è¾“å…¥æ•°æ®å…ƒç´ çš„ä¸ªæ•°ï¼š";
+	cout << "ÇëÊäÈëÊı¾İÔªËØµÄ¸öÊı£º";
 	cin >> n;
 	for (int i = 0; i < 4; i++) {
 		s[i].Create(n);
 	}
 
-	for (int i = 0; i < 4; i++) {
-		cout << "é€‰æ‹©æ’åºæ–¹å¼ã€æŠ˜åŠæ’å…¥æ’åºï¼ˆ1ï¼‰ï¼Œå¿«é€Ÿæ’åºï¼ˆ2ï¼‰ï¼Œç®€å•é€‰æ‹©æ’åºï¼ˆ3ï¼‰ï¼Œå †æ’åºï¼ˆ4ï¼‰ã€‘ï¼š";
+	for ( i = 0; i < 4; i++) {
+		cout << "Ñ¡ÔñÅÅĞò·½Ê½¡¾ÕÛ°ë²åÈëÅÅĞò£¨1£©£¬¿ìËÙÅÅĞò£¨2£©£¬¼òµ¥Ñ¡ÔñÅÅĞò£¨3£©£¬¶ÑÅÅĞò£¨4£©¡¿£º";
 			cin >> k;
 			if (k == 1) {
-				cout << "æŠ˜åŠæ’å…¥æ’åºå";
+				cout << "ÕÛ°ë²åÈëÅÅĞòºó";
 				s[k - 1].BInsertSort();
 				s[k - 1].Display();
-				cout << "è¯·è¾“å…¥æƒ³è¦æŸ¥æ‰¾çš„å€¼ï¼š";
+				cout << "ÇëÊäÈëÏëÒª²éÕÒµÄÖµ£º";
 				cin >> m;
-				cout << "é¡ºåºæŸ¥æ‰¾ç»“æœä¸ºï¼š" << s[k-1].BiSearch_1(m) << endl;
-				cout << "æŠ˜åŠæŸ¥æ‰¾ç»“æœä¸ºï¼š" << s[k-1].BiSearch_2(m) << endl;
+				cout << "Ë³Ğò²éÕÒ½á¹ûÎª£º" << s[k-1].SeSearch(m) << endl;
+				cout << "ÕÛ°ë²éÕÒ½á¹ûÎª£º" << s[k-1].BiSearch_1(m) << endl;
+				cout << "ÕÛ°ë²éÕÒ½á¹ûÎª£º" << s[k-1].BiSearch_2(m) << endl;
 			}
 			else if (k == 2) {
-				cout << "å¿«é€Ÿæ’åºå";
+				cout << "¿ìËÙÅÅĞòºó";
 				s[k - 1].BInsertSort();
 				s[k - 1].Display();
-				cout << "è¯·è¾“å…¥æƒ³è¦æŸ¥æ‰¾çš„å€¼ï¼š";
+				cout << "ÇëÊäÈëÏëÒª²éÕÒµÄÖµ£º";
 				cin >> m;
-				cout << "é¡ºåºæŸ¥æ‰¾ç»“æœä¸ºï¼š" << s[k - 1].BiSearch_1(m) << endl;
-				cout << "æŠ˜åŠæŸ¥æ‰¾ç»“æœä¸ºï¼š" << s[k - 1].BiSearch_2(m) << endl;
+				cout << "Ë³Ğò²éÕÒ½á¹ûÎª£º" << s[k - 1].SeSearch(m) << endl;
+				cout << "ÕÛ°ë²éÕÒ½á¹ûÎª£º" << s[k - 1].BiSearch_1(m) << endl;
 			}
 			else if (k == 3) {
-				cout << "ç®€å•é€‰æ‹©æ’åºå";
+				cout << "¼òµ¥Ñ¡ÔñÅÅĞòºó";
 				s[k - 1].BInsertSort();
 				s[k - 1].Display();
-				cout << "è¯·è¾“å…¥æƒ³è¦æŸ¥æ‰¾çš„å€¼ï¼š";
+				cout << "ÇëÊäÈëÏëÒª²éÕÒµÄÖµ£º";
 				cin >> m;
-				cout << "é¡ºåºæŸ¥æ‰¾ç»“æœä¸ºï¼š" << s[k - 1].BiSearch_1(m) << endl;
-				cout << "æŠ˜åŠæŸ¥æ‰¾ç»“æœä¸ºï¼š" << s[k - 1].BiSearch_2(m) << endl;
+				cout << "Ë³Ğò²éÕÒ½á¹ûÎª£º" << s[k - 1].SeSearch(m) << endl;
+				cout << "ÕÛ°ë²éÕÒ½á¹ûÎª£º" << s[k - 1].BiSearch_1(m) << endl;
 			}
 			else if (k == 4) {
-				cout << "å †æ’åºå";
+				cout << "¶ÑÅÅĞòºó";
 				s[k - 1].BInsertSort();
 				s[k - 1].Display();
-				cout << "è¯·è¾“å…¥æƒ³è¦æŸ¥æ‰¾çš„å€¼ï¼š";
+				cout << "ÇëÊäÈëÏëÒª²éÕÒµÄÖµ£º";
 				cin >> m;
-				cout << "é¡ºåºæŸ¥æ‰¾ç»“æœä¸ºï¼š" << s[k - 1].BiSearch_1(m) << endl;
-				cout << "æŠ˜åŠæŸ¥æ‰¾ç»“æœä¸ºï¼š" << s[k - 1].BiSearch_2(m) << endl;
+				cout << "Ë³Ğò²éÕÒ½á¹ûÎª£º" << s[k - 1].SeSearch(m) << endl;
+				cout << "ÕÛ°ë²éÕÒ½á¹ûÎª£º" << s[k - 1].BiSearch_1(m) << endl;
 			}
 	}
 
 	
 	return 0;
 }
-
